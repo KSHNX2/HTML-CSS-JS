@@ -1,17 +1,22 @@
+//전역변수
+let n;
+
 const domAdd = () => {
+    
     //함수를 호출하는것과 동일한효과
     console.log('domAdd');
     const btn1 = document.createElement("button");
-    btn1.innerHTML="버튼을 눌러주세요";
+    btn1.innerHTML="주사위를 굴러주세요";
     btn1.id="bt1";
     btn1.className="btc";
-    document.getElementById("s1").append(btn1);
+    document.getElementById("s4").append(btn1);
 
     const btn2 = document.createElement("button");
-    btn2.innerHTML="버튼을 눌러주세요";
+    btn2.innerHTML="확인";
     btn2.id="bt2";
     btn2.className="btc";
-    document.getElementById("s3").append(btn2);
+    document.getElementById("s4").append(btn2);
+    
 }
 
 
@@ -47,7 +52,9 @@ const domRead = () =>{
 //DOM 요소 수정
  //click 함수
 
+
  const show=(dpsS1, dspS2, dspS3, dspBt1, dspBt2) =>{
+    //요소 보이기 함수
     const s1 = document.querySelector("#s1");
     const s2 = document.querySelector("#s2");
     const s3 = document.querySelector("#s3");
@@ -55,54 +62,73 @@ const domRead = () =>{
     const bt1 = document.querySelector("#bt1");
     const bt2 = document.querySelector("#bt2");
 
-    s1.style.display = "dpsS1";
-    s2.style.display = "dspS2";
-    s3.style.display = "dspS3";
-
-    bt1.style.display = "dspBt1";
-    bt2.style.display = "dspBt2";
+    s1.style.display = dpsS1;
+    s2.style.display = dspS2;
+    s3.style.display = dspS3;
+    bt1.style.display = dspBt1;
+    bt2.style.display = dspBt2;
  
  };
 
-document.addEventListener("DOMContentLoaded", () => {
-    show("none", "none", "block", "none")
-    
-})
+//주사위 번호 선택
+const domRandom = () =>{
+     n = Math.floor(Math.random() * 6 )+1;
+    console.log(n)
+    show("none", "block", "none", "none","block");
+}
 
+//주사위 번호 결과 확인
+const showOK=()=>{
+    const radios = document.querySelectorAll("input[type=radio]")
+    
+    let usern;
+    for(let r of radios){
+        if (r.checked){
+            //정수형 변환 parseint
+            usern = parseInt(r.value);
+            break;
+        }
+    }    
+    console.log(n, usern)
+    let tag;
+    if(n === usern)tag = "o";
+    //비교연산자'==='은 데이터 타입까지 검사한다(js전용) 
+    else tag = "x"
+
+    document.querySelector("form").reset();
+
+    document.querySelector("#s1").innerHTML=`<img src="./img/${n}.png">`
+    document.querySelector("#s3").innerHTML=`<img src="./img/${tag}.png">`
+    show("block","none","block","block","none")
+}
 
  const domupdate = () => {
-    const div1 = document.querySelector("#div1");
-    const btc=document.querySelectorAll(".btc");   
+    /*
+    const section1 = document.querySelector("#s1");
+    
     bt1.addEventListener("click", ()=>{        
-        div1.innerHTML=`<img src='./img/${domRandom()}.png'>`
+        s1.innerHTML=`<img src='./img/${domRandom()}.png'>`
     });    
+    */
+    bt1.addEventListener("click", domRandom) ;
+    bt2.addEventListener("click", showOK) ;
+
 }
-
-
-    
-const domRandom=()=>{
-    const random = Math.floor(Math.random ()*6)+1;
-    console.log(random);
-    
-    if(random == 1){}
-    return random;
-}
-
-
-
-
-
 
 
 //자바스크립트 렌더링 제어
+//dom 로드 이후
+
 document.addEventListener("DOMContentLoaded", () =>{
     //DOM 요소 생성
+
     domAdd();
 
-    //dom 요소 접근
-    domRead();
-
     domupdate();
+
+    show("none", "none", "none", "block","none")
+    //dom 요소 접근
+    
 });
 
     

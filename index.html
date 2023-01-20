@@ -16,22 +16,14 @@
         <h1>play_dice</h1>
     </header>
     <main id="content">
-        <div id="div1">주사위를 굴려주세요</div>
-        <div id="div2"></div>
-        <div>
-            <div>
-                요소를 선택하세요
-                <br>
-                
-        </div>
-        
-        </div>
 
         <section id="s1">
-
+            이미지
         </section>
-
         <section id="s2">
+            <form name="form1" id="form1">
+            <fieldset>
+            <legend>번호선택</legend>
             <input type="radio" name="chk_info" id="dice_num_1"value="1">
                 <label for="dice_num_1">1</label>
                 <input type="radio" name="chk_info" id="dice_num_2"value="2">
@@ -44,10 +36,15 @@
                 <label for="dice_num_5">5</label>
                 <input type="radio" name="chk_info" id="dice_num_6"value="6">
                 <label for="dice_num_6">6</label>
-        </section>
-    
+            </fieldset>
+        </form>
+        </section>    
         <section id="s3">
-            <div id="div3">라디오 버튼을 눌러주세요</div>
+            <div id="div3">OX</div>
+        </section>
+        <section id="s4"><!--
+            <button id = "bt1" onclick="showDice()">주사위선택</button>
+            <button id = "bt2" onclick="showOk()">확인</button>-->
         </section>
         
     </main>
